@@ -13,7 +13,8 @@ const BranchSchema = new Schema({
 });
 
 // Register Company and Branch models if not already registered
-const Company = mongoose.models.Company || mongoose.model("Company", CompanySchema);
+const Company =
+  mongoose.models.Company || mongoose.model("Company", CompanySchema);
 const Branch = mongoose.models.Branch || mongoose.model("Branch", BranchSchema);
 
 // Subdocument schema for roles with company and branch references

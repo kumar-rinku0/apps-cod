@@ -72,4 +72,4 @@ app.listen(port, () => {
 
 // oops!
 // Attach the Socket.io instance to the server
-io.attach(server);
+// io.attach(server);
