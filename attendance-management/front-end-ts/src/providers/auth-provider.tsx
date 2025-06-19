@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 
 // import types
-import type { userInfoType } from "@/types/auth";
+import type { UserType } from "@/types/auth";
 import { AuthContext } from "./use-auth";
 
 // Create the Context with default value as null
@@ -15,9 +15,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useNavigate();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState<userInfoType | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
 
-  const signIn = (userInfo: userInfoType) => {
+  const signIn = (userInfo: UserType) => {
     if (userInfo) {
       setUser(userInfo);
       setIsAuthenticated(true);
@@ -37,21 +37,26 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   // Check authentication status on initial render
   useEffect(() => {
-    axios
-      .get("/api")
-      .then((res) => {
-        console.log(res.data.user);
-        if (res.data.user) {
-          signIn(res.data.user);
-        }
-      })
-      .catch((err) => {
-        console.error("Authentication check failed: ", err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [router]);
+    if (isAuthenticated) {
+      setLoading(false);
+      return;
+    } else {
+      axios
+        .get("/api")
+        .then((res) => {
+          console.log(res.data.user);
+          if (res.data.user) {
+            signIn(res.data.user);
+          }
+        })
+        .catch((err) => {
+          console.error("Authentication check failed: ", err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [isAuthenticated]);
 
   return (
     <AuthContext.Provider

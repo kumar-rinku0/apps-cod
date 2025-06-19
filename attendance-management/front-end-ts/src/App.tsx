@@ -7,6 +7,11 @@ import HomePage from "./components/root/home-page";
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 import reactsvg from "@/assets/react.svg";
+import { Toaster } from "./components/ui/sonner";
+import NoPage from "./components/root/no-page";
+import CreateCompany from "./components/private/create/create-company";
+import VerifyPage from "./components/auth/verify-user";
+import ResetPage from "./components/auth/reset-password";
 
 function App() {
   const { loading, isAuthenticated } = useAuth();
@@ -20,22 +25,18 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Header />}>
-          <Route
-            path="/"
-            element={
-              <HomePage
-              // btn={isAuthenticated ? "GET IN" : "GET STARTED"}
-              // btnRef={isAuthenticated ? "/settings" : "/login"}
-              />
-            }
-          />
-          {/* <Route path="/verify" element={<VerifyEmail />} />
-          <Route path="/password" element={<ForgotPassword />} />
-          <Route path="/reset" element={<ResetPassword />} /> */}
-          {isAuthenticated && (
+        {!isAuthenticated && (
+          <>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/verify" element={<VerifyPage />} />
+            <Route path="/reset" element={<ResetPage />} />
+          </>
+        )}
+        {isAuthenticated && (
+          <Route path="/" element={<Header />}>
+            <Route path="/company" element={<CreateCompany />} />
             <>
               {/* <Route path="/settings" element={<Settings />} />
               <Route path="/select" element={<SelectCompany />} />
@@ -68,11 +69,11 @@ function App() {
               <Route path="/message" element={<MessagesSystem />} />
               <Route path="/button" element={<ExportUsersCSVButton />} /> */}
             </>
-          )}
-
-          {/* <Route path="/*" element={<NoPage />} /> */}
-        </Route>
+          </Route>
+        )}
+        <Route path="/*" element={<NoPage />} />
       </Routes>
+      <Toaster />
     </div>
   );
 }

@@ -6,7 +6,7 @@ import { useSearchParams, useNavigate } from "react-router";
 import { Suspense } from "react";
 import { toast } from "sonner";
 
-const Varify = () => {
+const Verify = () => {
   const router = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("TOKEN");
@@ -34,12 +34,12 @@ const Varify = () => {
   );
 };
 
-const VarifyPage = () => {
+const VerifyPage = () => {
   return (
     <Suspense>
-      <Varify />
+      <Verify />
     </Suspense>
   );
 };
 
-export default VarifyPage;
+export default VerifyPage;

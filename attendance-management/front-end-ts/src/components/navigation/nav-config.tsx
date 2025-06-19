@@ -19,6 +19,13 @@ export const NavItems = () => {
   }
 
   const data = {
+    teams: [
+      {
+        name: "Dummy",
+        logo: LayoutDashboard,
+        plan: "Free",
+      },
+    ],
     user: {
       name: "shadcn",
       email: "m@example.com",

@@ -233,7 +233,7 @@ const LoginOverlay = ({
             picture,
             role: role,
           });
-          router("/dashboard");
+          router("/");
           toast(`${givenName} ${familyName} welcome to onvoid!`, {
             description: "remember password?",
             action: {
@@ -351,7 +351,7 @@ const LoginOverlay = ({
             variant="outline"
             className="w-full"
             disabled={isAuthenticated}
-            // onClick={() => router(authorizeUrl)}
+            // onClick={() => router.push(authorizeUrl)}
           >
             Login with Google
           </Button>

@@ -1,23 +1,20 @@
+import type { CompanyRoleType } from "./company";
+
 // Define the types for the user and the AuthContext
-export type userInfoType = {
+export type UserType = {
   _id: string;
   name: string;
   username: string;
   email: string;
   picture: string;
-  role?: {
-    _id: string;
-    name: string;
-    company: string;
-    role: string;
-    branch?: string;
-  };
+  role?: CompanyRoleType;
+  roles?: CompanyRoleType[];
 };
 
 export type AuthContextType = {
   isAuthenticated: boolean;
-  user: userInfoType | null;
-  signIn: (userInfo: userInfoType) => void;
+  user: UserType | null;
+  signIn: (userInfo: UserType) => void;
   signOut: () => void;
   loading: boolean;
 };
