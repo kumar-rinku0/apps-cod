@@ -38,7 +38,7 @@ import MessagesSystem from "./components/partials/MessageSystem";
 import ExportUsersCSVButton from "./components/partials/ExportUsersCSVButton";
 
 function App() {
-  const { loading, isAuthenticated, user } = useAuth();
+  const { loading, isAuthenticated } = useAuth();
   if (loading) {
     return (
       <div className="app w-full h-[90vh] flex justify-center items-center lead">
@@ -96,7 +96,7 @@ function App() {
               <Route path="/notespage" element={<NotesPage />} />
               <Route path="/message" element={<MessagesSystem />} />
               <Route path="/button" element={<ExportUsersCSVButton />} />
-              
+
 
             </>
           )}
